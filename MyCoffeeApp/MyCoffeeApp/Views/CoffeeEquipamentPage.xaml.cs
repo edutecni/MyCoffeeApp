@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace MyCoffeeApp.Views
@@ -12,9 +6,14 @@ namespace MyCoffeeApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CoffeeEquipamentPage : ContentPage
     {
+        
         public CoffeeEquipamentPage()
         {
             InitializeComponent();
-        }
+
+            // Pode se ligar assim ou adiconar direto no *.Xaml
+            //BindingContext = new CoffeeEquipmentViewModel();
+        }       
+        
     }
 }

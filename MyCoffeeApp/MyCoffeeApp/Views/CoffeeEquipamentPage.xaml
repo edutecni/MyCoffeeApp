@@ -1,13 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+<ContentPage 
              x:Class="MyCoffeeApp.Views.CoffeeEquipamentPage"
-             BackgroundColor="Orange">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MyCoffeeApp.ViewModels"
+             BackgroundColor="White"
+             x:DataType="viewmodels:CoffeeEquipmentViewModel">
+
+    <ContentPage.BindingContext>
+        <viewmodels:CoffeeEquipmentViewModel />                    
+    </ContentPage.BindingContext>
+    
+    <Grid RowDefinitions="*,Auto,Auto,*">
+
+        <!--<Entry Text="{Binding  CountDisplay}" />-->
+
+        <Label 
+                x:Name="lblCount"
+                Grid.Row="1"
+                HorizontalOptions="Center"
+                FontSize="Large"
+                Text="{Binding CountDisplay}"/>
+       
+        <Button 
+                Command="{Binding IncreaseCount}"
+                Grid.Row="2" Text="Click Me" />
+    </Grid>
 </ContentPage>
