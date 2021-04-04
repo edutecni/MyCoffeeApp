@@ -26,5 +26,6 @@
                 BackgroundColor="Orange"
                 Command="{Binding IncreaseCount}"
                 Grid.Row="2" Text="Click Me" />
+        
     </Grid>
 </ContentPage>

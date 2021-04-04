@@ -1,13 +1,32 @@
-﻿using System.Windows.Input;
-using Xamarin.Forms;
+﻿// Helper que auxilia verificar se uma propriedade foi alterada
+// Helper that help verify if a propertie was altered
+using MvvmHelpers;
+using MvvmHelpers.Commands;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Windows.Input;
+
 
 namespace MyCoffeeApp.ViewModels
 {
-    public class CoffeeEquipmentViewModel : BindableObject
+    public class CoffeeEquipmentViewModel : ViewModelBase
     {
+        public ObservableRangeCollection<string> Coffee { get; }
         public CoffeeEquipmentViewModel()
         {
             IncreaseCount = new Command(OnIncrease);
+            CallServerCommand = new AsyncCommand(CallServer);
+            Coffee = new ObservableRangeCollection<string>();
+            Title = "Coffee Equipament";
+        }
+
+        public ICommand CallServerCommand { get;  }
+        async Task CallServer()
+        {
+            var items = new List<string> { "Yes Plz", "Tonx", "Blue Bottle" };
+            Coffee.AddRange(items);
+            
         }
 
         public ICommand IncreaseCount { get; }
@@ -19,14 +38,7 @@ namespace MyCoffeeApp.ViewModels
         {
             get => countDisplay;
 
-            set
-            {
-                if (value == countDisplay)
-                    return;
-
-                countDisplay = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref countDisplay, value);
         }
 
         void OnIncrease()
