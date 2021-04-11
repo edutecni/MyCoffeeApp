@@ -9,11 +9,21 @@ namespace MyCoffeeApp.Views
         
         public CoffeeEquipamentPage()
         {
-            InitializeComponent();
+            InitializeComponent();           
+        }
 
-            // Pode se ligar assim ou adiconar direto no *.Xaml
-            //BindingContext = new CoffeeEquipmentViewModel();
-        }       
-        
+        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+
+        }
+
+        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+
+        }
+        private void MenuItem_Clicked(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }
