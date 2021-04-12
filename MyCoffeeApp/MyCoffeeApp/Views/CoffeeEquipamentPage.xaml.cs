@@ -34,5 +34,10 @@ namespace MyCoffeeApp.Views
 
             await DisplayAlert("Coffee Favorited", coffee.Name, "OK");
         }
+
+        private void ListView_Refreshing(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }

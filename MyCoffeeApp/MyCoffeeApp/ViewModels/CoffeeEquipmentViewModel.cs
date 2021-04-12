@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-
+using Xamarin.Forms;
 
 namespace MyCoffeeApp.ViewModels
 {
@@ -38,7 +38,26 @@ namespace MyCoffeeApp.ViewModels
 
             CoffeeGroups.Add(new Grouping<string, Coffee>("Blue Bottle", new[] { Coffee[2] }));
             CoffeeGroups.Add(new Grouping<string, Coffee>("Yes Plz", Coffee.Take(2)));
-            
+
+            RefreshCommand = new AsyncCommand(Refresh);
+        }
+
+        Coffee selectedCoffee;
+
+        public Coffee SelectedCoffee
+        {
+            get => selectedCoffee;
+            set
+            {
+                if(value != null)
+                {
+                    Application.Current.MainPage.DisplayAlert("Selected", value.Name, "Ok");
+                    value = null;
+                }
+
+                selectedCoffee = value;
+                OnPropertyChanged();
+            }
         }
 
         async Task Refresh()

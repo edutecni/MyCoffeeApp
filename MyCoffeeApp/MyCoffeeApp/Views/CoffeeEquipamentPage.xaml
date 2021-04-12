@@ -20,6 +20,7 @@
               HasUnevenRows="True" 
               ItemsSource="{Binding CoffeeGroups}"
               IsGroupingEnabled="True" 
+              Refreshing="ListView_Refreshing"
               GroupDisplayBinding="{Binding Key}"
               SeparatorVisibility="None"
               IsPullToRefreshEnabled="True"
