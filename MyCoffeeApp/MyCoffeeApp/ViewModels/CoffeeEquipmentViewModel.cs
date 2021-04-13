@@ -18,6 +18,9 @@ namespace MyCoffeeApp.ViewModels
         public ObservableRangeCollection<Grouping<string, Coffee>> CoffeeGroups  { get; }
 
         public AsyncCommand RefreshCommand { get; }
+
+        public AsyncCommand<Coffee> FavoriteCommand { get; }
+
         public CoffeeEquipmentViewModel()
         {
             Title = "Coffee Equipment";
@@ -40,8 +43,18 @@ namespace MyCoffeeApp.ViewModels
             CoffeeGroups.Add(new Grouping<string, Coffee>("Yes Plz", Coffee.Take(2)));
 
             RefreshCommand = new AsyncCommand(Refresh);
+            FavoriteCommand = new AsyncCommand<Coffee>(Favorite);
         }
 
+        async Task Favorite(Coffee coffee)
+        {
+            if (coffee == null)
+                return;
+
+            await Application.Current.MainPage.DisplayAlert("Favorite", coffee.Name, "Ok");
+        }
+
+        Coffee previouslySelected;
         Coffee selectedCoffee;
 
         public Coffee SelectedCoffee
@@ -52,6 +65,7 @@ namespace MyCoffeeApp.ViewModels
                 if(value != null)
                 {
                     Application.Current.MainPage.DisplayAlert("Selected", value.Name, "Ok");
+                    previouslySelected = value;
                     value = null;
                 }
 

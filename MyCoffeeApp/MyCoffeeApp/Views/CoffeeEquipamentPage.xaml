@@ -4,8 +4,9 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:MyCoffeeApp.ViewModels" xmlns:model="clr-namespace:MyCoffeeApp.Models"
-    BackgroundColor="White"
-             x:DataType="viewmodels:CoffeeEquipmentViewModel">
+             BackgroundColor="White"
+             x:DataType="viewmodels:CoffeeEquipmentViewModel"
+             x:Name="CoffeePage">
 
     <ContentPage.BindingContext>
         <viewmodels:CoffeeEquipmentViewModel />                    
@@ -13,8 +14,7 @@
 
     <!-- HasUnevenRows  => Tem linhas desiguais? -->
     <ListView 
-              ItemSelected="ListView_ItemSelected"
-              ItemTapped="ListView_ItemTapped"
+              SelectedItem="{Binding SelectedCoffee, Mode=TwoWay}"
               CachingStrategy="RecycleElement"
               BackgroundColor="Transparent"
               HasUnevenRows="True" 
@@ -32,7 +32,9 @@
             <DataTemplate x:DataType="model:Coffee">               
                 <ViewCell>
                     <ViewCell.ContextActions>
-                        <MenuItem Text="Favorite"  Clicked="MenuItem_Clicked" />
+                        <MenuItem Text="Favorite"
+                                  Command="{Binding Source={x:Reference  CoffeePage}, Path=BindingContext.FavoriteCommand}"                                  
+                                  CommandParameter="{Binding .}" />
                         <MenuItem Text="Delete" IsDestructive="True"/>
                     </ViewCell.ContextActions>
                     <Grid Padding="10">
@@ -48,6 +50,10 @@
                                            FontSize="Large"
                                            Text="{Binding Roaster}" />
                                 </StackLayout>
+                                <Button  Text="Favorite"
+                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CoffeeEquipmentViewModel}}, 
+                                    Path=FavoriteCommand}"
+                                         CommandParameter="{Binding .}"/>
                             </StackLayout>
                         </Frame>
                     </Grid>
